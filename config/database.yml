@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: b2b_syariah_development
+  pool: 5
+  username: zenix
+  password: 1425
