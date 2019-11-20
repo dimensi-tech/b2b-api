@@ -1,3 +1,4 @@
+
 class V1::ProductsController < ApplicationController
   before_action :set_product, only: %i[product_detail]
 
@@ -13,7 +14,7 @@ class V1::ProductsController < ApplicationController
 
   def product_detail
     if @product.present?
-      render json: @product
+      render json: @product, serializer: ProductSerializer
     else
       render json: { success: false, message: 'product not found' }
     end
