@@ -14,7 +14,7 @@ class V1::ProductsController < ApplicationController
 
   def product_detail
     if @product.present?
-      render json: @product, serializer: ProductSerializer
+      render json: @product, serializer: ProductDetailSerializer
     else
       render json: { success: false, message: 'product not found' }
     end
