@@ -9,6 +9,7 @@ set :use_sudo, false
 append :linked_files, 'config/database.yml', 'config/secrets.yml', '.env'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets',
        'vendor/bundle', 'public/system', 'public/uploads'
+set :assets_roles, []
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
