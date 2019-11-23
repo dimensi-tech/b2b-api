@@ -1,6 +1,7 @@
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description
+  attributes :id, :name, :description, :image, :package
 
-  has_many :packages
-  has_many :package_details, through: :packages
+  def package
+    object.packages.order(price: :asc).last
+  end
 end
