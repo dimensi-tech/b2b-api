@@ -10,5 +10,11 @@ Rails.application.routes.draw do
         get :product_detail
       end
     end
+
+    resources :ads do
+      collection do
+        get :active_ads
+      end
+    end
   end
 end
