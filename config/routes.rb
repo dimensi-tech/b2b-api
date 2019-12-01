@@ -19,8 +19,9 @@ Rails.application.routes.draw do
     resources :products do
       collection do
         get :list_products
-        get :product_detail
       end
     end
+
+    get 'product/:product_id', to: 'products#product_detail'
   end
 end
