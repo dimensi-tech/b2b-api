@@ -1,10 +1,12 @@
-
 class V1::ProductsController < ApplicationController
   before_action :set_product, only: %i[product_detail]
 
   def list_products
-    @products = Product.all
-
+    @products = if params[:q].present?
+                  Product.order(name: :asc).ransack(params[:q])
+                else
+                  Product.order(name: :asc)
+                end
     if @products.present?
       render json: @products
     else
