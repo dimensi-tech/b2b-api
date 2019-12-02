@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :bookings do
       collection do
         post :create_booking
+        post :assign_identities
+        get :list_bookings
       end
     end
 
