@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   namespace :v1 do
     resources :customers
-    resources :packages
     resources :tokens, only: :create
 
     resources :ads do
@@ -21,6 +20,12 @@ Rails.application.routes.draw do
     resources :products do
       collection do
         get :list_products
+      end
+    end
+
+    resources :packages do
+      collection do
+        get :package_detail
       end
     end
 
