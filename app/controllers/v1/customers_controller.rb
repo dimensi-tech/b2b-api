@@ -1,7 +1,11 @@
 class V1::CustomersController < ApplicationController
   def create
     input = Customer.new(customer_params)
-    input.save ? :ok : :bad_request
+    if input.save
+      render json: input
+    else
+      render json: { success: false, message: input.errors }
+    end
   end
 
   private
