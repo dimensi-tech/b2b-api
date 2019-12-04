@@ -1,5 +1,5 @@
 class V1::PackagesController < ApplicationController
-  before_action :set_package, only: %i[show]
+  before_action :set_package, only: %i[package_detail]
 
   def index
     @packages = Package.all
@@ -11,9 +11,9 @@ class V1::PackagesController < ApplicationController
     end
   end
 
-  def show
+  def package_detail
     if @package.present?
-      render json: @package
+      render json: @package, serializer: PackageSerializer
     else
       render json: { success: false, message: 'package not found.' }
     end
@@ -22,6 +22,6 @@ class V1::PackagesController < ApplicationController
   private
 
   def set_package
-    @package = Package.find_by(id: params[:id])
+    @package = Package.find_by(id: params[:package_id])
   end
 end
