@@ -2,11 +2,8 @@ class V1::ProductsController < ApplicationController
   before_action :set_product, only: %i[product_detail]
 
   def list_products
-    @products = if params[:q].present?
-                  Product.order(name: :asc).ransack(params[:q])
-                else
-                  Product.order(name: :asc)
-                end
+    search = Product.order(created_at: :desc).ransack(params[:q])
+    @products = search.result(distinct: true)
     if @products.present?
       render json: @products
     else
