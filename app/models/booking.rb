@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :customer, optional: :true
-  belongs_to :package
+  belongs_to :package, optional: :true
+  belongs_to :voucher, optional: :true
 
   after_create :assign_number
 
