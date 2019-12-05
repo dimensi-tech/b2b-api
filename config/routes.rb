@@ -29,6 +29,13 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :vouchers do
+      collection do
+        post :create_voucher_usage
+        get :detail_voucher
+      end
+    end
+
     get 'product/:product_id', to: 'products#product_detail'
   end
 end
