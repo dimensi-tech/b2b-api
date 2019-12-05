@@ -1,6 +1,7 @@
 class PackageSerializer < ActiveModel::Serializer
   attributes :id, :discount_percentage, :product_id, :discount_id, :discount_price,
-             :down_payment, :duration_trip, :available_date, :normal_price, :name, :description
+             :min_person, :max_person, :down_payment, :duration_trip, :available_date,
+             :normal_price, :name, :description
 
   belongs_to :product
   belongs_to :discount

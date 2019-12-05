@@ -9,6 +9,7 @@ module V1
       if @booking.save
         render json: @booking, serializer: BookingSerializer
       else
+        puts @booking.errors
         render json: { success: false, message: 'Error Create booking' }
       end
     end
@@ -22,10 +23,10 @@ module V1
     end
 
     def list_bookings
-      @booking = Booking.find_by(customer_id: params[:customer_id])
+      @bookings = Booking.where(customer_id: params[:customer_id])
 
-      if @booking.present?
-        render json: @booking, serializer: BookingSerializer
+      if @bookings.present?
+        render json: @bookings
       else
         render json: { success: false, message: 'Error Assign Identity Ids' }
       end
@@ -39,8 +40,8 @@ module V1
 
     def booking_params
       params.require(:booking)
-            .permit(:departure_date, :package_id, :child,
-                    :adult, :customer_id, identity_ids: [])
+            .permit(:departure_date, :package_id, :voucher_id, :person, :price,
+                    :customer_id, identity_ids: [])
     end
 
     def identities_params
