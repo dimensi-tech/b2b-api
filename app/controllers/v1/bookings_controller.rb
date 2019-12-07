@@ -5,6 +5,7 @@ module V1
     before_action :set_booking, only: %i[assign_identities]
     def create_booking
       @booking = Booking.new(booking_params)
+      @booking.customer_id = @current_customer.id
 
       if @booking.save
         render json: @booking, serializer: BookingSerializer
@@ -23,7 +24,7 @@ module V1
     end
 
     def list_bookings
-      @bookings = Booking.where(customer_id: params[:customer_id])
+      @bookings = Booking.where(customer_id: @current_customer.id)
 
       if @bookings.present?
         render json: @bookings

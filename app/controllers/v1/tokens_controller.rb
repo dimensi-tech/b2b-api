@@ -1,20 +1,12 @@
 class V1::TokensController < ApplicationController
-  def create
-    customer = Customer.find_by(email: params[:email])
-    if customer&.authenticate(params[:password])
-      render json: {
-        jwt: encode_token({id: customer.id, email: customer.email})
-      }
-    else
-      head :not_found
-    end
-  end
+  skip_before_action :authenticate_request
 
-  private
-  
-  def encode_token(payload={})
-    expired = 24.hours.from_now
-    payload[:expired] = expired.to_i
-    JWT.encode(payload, Rails.application.secrets.secret_key_base)
+  def create
+    command = AuthenticateCustomer.call(params[:email], params[:password])
+    if command.success?
+      render json: { jwt: command.result }
+    else
+      render json: { error: command.errors }, status: :unauthorized
+    end
   end
 end

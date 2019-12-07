@@ -1,5 +1,6 @@
 class V1::PackagesController < ApplicationController
   before_action :set_package, only: %i[package_detail]
+  skip_before_action :authenticate_request
 
   def index
     @packages = Package.all
