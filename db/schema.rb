@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_151145) do
+ActiveRecord::Schema.define(version: 2019_12_05_145800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ads", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.boolean "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.string "number"
+    t.integer "package_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "customer_id"
+    t.integer "adult"
+    t.integer "child"
+    t.date "departure_date"
+    t.integer "identity_ids", default: [], array: true
+    t.decimal "price"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
@@ -25,6 +55,16 @@ ActiveRecord::Schema.define(version: 2019_11_18_151145) do
   create_table "customers", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "discounts", force: :cascade do |t|
+    t.string "name"
+    t.decimal "percentage"
+    t.boolean "status"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -42,6 +82,13 @@ ActiveRecord::Schema.define(version: 2019_11_18_151145) do
     t.string "name"
     t.text "description"
     t.string "icon"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "icons", force: :cascade do |t|
+    t.string "code"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -93,8 +140,10 @@ ActiveRecord::Schema.define(version: 2019_11_18_151145) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "min_person"
     t.integer "max_person"
-    t.string "available_date", default: [], array: true
     t.string "duration_trip"
+    t.integer "discount_id"
+    t.decimal "down_payment"
+    t.string "available_date", default: [], array: true
   end
 
   create_table "passports", force: :cascade do |t|
@@ -116,6 +165,8 @@ ActiveRecord::Schema.define(version: 2019_11_18_151145) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+    t.integer "category_id"
+    t.integer "travel_destination_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -166,6 +217,7 @@ ActiveRecord::Schema.define(version: 2019_11_18_151145) do
     t.string "destination"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
   create_table "urban_villages", force: :cascade do |t|
@@ -184,6 +236,7 @@ ActiveRecord::Schema.define(version: 2019_11_18_151145) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -194,6 +247,26 @@ ActiveRecord::Schema.define(version: 2019_11_18_151145) do
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
+  create_table "voucher_usages", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "voucher_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "vouchers", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.decimal "percentage"
+    t.decimal "max_amount"
+    t.integer "max_usage"
+    t.boolean "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
