@@ -1,5 +1,6 @@
 class V1::ProductsController < ApplicationController
   before_action :set_product, only: %i[product_detail]
+  skip_before_action :authenticate_request
 
   def list_products
     search = Product.order(created_at: :desc).ransack(params[:q])

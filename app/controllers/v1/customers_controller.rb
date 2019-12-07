@@ -1,4 +1,6 @@
 class V1::CustomersController < ApplicationController
+  skip_before_action :authenticate_request
+
   def create
     input = Customer.new(customer_params)
     if input.save
