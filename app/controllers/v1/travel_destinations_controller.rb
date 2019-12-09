@@ -1,6 +1,7 @@
 module V1
   class TravelDestinationsController < ApplicationController
     before_action :set_travel_destination, only: %i[detail_travel_destination]
+    skip_before_action :authenticate_request
 
     def featured_destinations
       @search              = TravelDestination.limit(4).ransack(params[:q])
