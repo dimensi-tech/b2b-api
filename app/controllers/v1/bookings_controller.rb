@@ -2,7 +2,7 @@
 
 module V1
   class BookingsController < ApplicationController
-    before_action :set_booking, only: %i[assign_identities]
+    before_action :set_booking, only: %i[assign_identities booking_detail]
     def create_booking
       @booking = Booking.new(booking_params)
       @booking.customer_id = @current_customer.id
@@ -30,6 +30,16 @@ module V1
         render json: @bookings
       else
         render json: { success: false, message: 'Error Assign Identity Ids' }
+      end
+    end
+
+    def booking_detail
+      @booking = Booking.where(customer_id: @current_customer.id,
+                               id: params[:booking_id]).last
+      if @booking.present?
+        render json: @booking, serializer: BookingSerializer
+      else
+        render json: { success: false, message: 'Cannot find booking Id' }
       end
     end
 
