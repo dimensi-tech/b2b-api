@@ -37,6 +37,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :payments do
+      collection do
+        get :veritrans_token
+      end
+    end
+
     resources :travel_destinations do
       collection do
         get :featured_destinations

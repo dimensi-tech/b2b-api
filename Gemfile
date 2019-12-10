@@ -46,9 +46,12 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# Add by us
 gem 'active_model_serializers'
 gem 'carrierwave', '~> 2.0'
 gem 'dotenv-rails', '2.7.4' # dotenv hiding secrets key
 gem 'ransack'
 gem 'simple_command'
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'veritrans', '2.3.0'

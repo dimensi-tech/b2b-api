@@ -3,11 +3,13 @@
 module V1
   class BookingsController < ApplicationController
     before_action :set_booking, only: %i[assign_identities booking_detail]
+    
     def create_booking
       @booking = Booking.new(booking_params)
       @booking.customer_id = @current_customer.id
 
       if @booking.save
+        @booking.generate_payment_code
         render json: @booking, serializer: BookingSerializer
       else
         puts @booking.errors

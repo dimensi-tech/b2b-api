@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_145800) do
+ActiveRecord::Schema.define(version: 2019_12_10_135355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_145800) do
     t.boolean "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "url"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -35,6 +36,9 @@ ActiveRecord::Schema.define(version: 2019_12_05_145800) do
     t.date "departure_date"
     t.integer "identity_ids", default: [], array: true
     t.decimal "price"
+    t.integer "voucher_id"
+    t.integer "person"
+    t.string "payment_code"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -155,6 +159,17 @@ ActiveRecord::Schema.define(version: 2019_12_05_145800) do
     t.date "expired_date"
     t.date "birth_date"
     t.integer "identity_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "payment_activities", force: :cascade do |t|
+    t.integer "booking_id"
+    t.string "order_id"
+    t.decimal "amount"
+    t.string "payment_type"
+    t.string "transaction_status"
+    t.string "status_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

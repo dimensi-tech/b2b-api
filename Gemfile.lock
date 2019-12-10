@@ -103,6 +103,7 @@ GEM
       dotenv (= 2.7.4)
       railties (>= 3.2, < 6.1)
     erubi (1.9.0)
+    excon (0.70.0)
     ffi (1.11.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -206,6 +207,8 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    veritrans (2.3.0)
+      excon (~> 0.20)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -237,6 +240,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  veritrans (= 2.3.0)
 
 RUBY VERSION
    ruby 2.6.3p62
