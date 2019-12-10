@@ -11,6 +11,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :banners do
+      collection do
+        get :active_banners
+      end
+    end
+
     resources :bookings do
       collection do
         post :create_booking
