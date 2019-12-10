@@ -1,0 +1,14 @@
+development:
+  client_key: "SB-Mid-client-cRb9z_PpwC3twP5z"
+  server_key: "SB-Mid-server-YAxhhaXZP5u3MJchUadi296f"
+  api_host: https://api.sandbox.midtrans.com
+
+production:
+  client_key: <%= ENV['VERITRANS_CLIENT_KEY'] %>
+  server_key: <%= ENV['VERITRANS_SERVER_KEY'] %>
+  api_host: https://api.midtrans.com
+
+staging:
+  client_key: <%= ENV['VT_SANDBOX_CLIENT_KEY'] %>
+  server_key: <%= ENV['VT_SANDBOX_SERVER_KEY'] %>
+  api_host: https://api.sandbox.midtrans.com
