@@ -2,8 +2,8 @@
 
 module V1
   class BookingsController < ApplicationController
-    before_action :set_booking, only: %i[assign_identities booking_detail]
-    
+    before_action :set_booking, only: %i[assign_identities booking_detail update_midtrans]
+
     def create_booking
       @booking = Booking.new(booking_params)
       @booking.customer_id = @current_customer.id
@@ -45,6 +45,14 @@ module V1
       end
     end
 
+    def update_midtrans
+      if @booking.present? && @booking.update(midtrans_id: params[:midtrans_id])
+        render json: @booking, serializer: BookingSerializer
+      else
+        render json: { success: false, message: 'Midtrans failed to update' }
+      end
+    end
+
     private
 
     def set_booking
@@ -54,7 +62,7 @@ module V1
     def booking_params
       params.require(:booking)
             .permit(:departure_date, :package_id, :voucher_id, :person, :price,
-                    :customer_id, identity_ids: [])
+                    :midtrans_id, :customer_id, identity_ids: [])
     end
 
     def identities_params
