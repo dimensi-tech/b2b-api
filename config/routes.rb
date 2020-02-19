@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         post :assign_identities
         post :update_midtrans
         get :list_bookings
+        get :list_paid_bookings
       end
     end
 

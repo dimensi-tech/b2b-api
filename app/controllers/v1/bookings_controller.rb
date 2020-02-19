@@ -46,10 +46,19 @@ module V1
     end
 
     def update_midtrans
-      if @booking.present? && @booking.update(midtrans_id: params[:midtrans_id])
+      if @booking.present? && @booking.update(midtrans_id: params[:midtrans_id], status: 1)
         render json: @booking, serializer: BookingSerializer
       else
         render json: { success: false, message: 'Midtrans failed to update' }
+      end
+    end
+
+    def list_paid_bookings
+      @bookings = Booking.where(customer_id: @current_customer.id, status: 1)
+      if @bookings.present?
+        render json: @bookings
+      else
+        render json: { success: false, message: 'Paid booking not available' }
       end
     end
 

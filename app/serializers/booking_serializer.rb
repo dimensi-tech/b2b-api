@@ -1,6 +1,6 @@
 class BookingSerializer < ActiveModel::Serializer
-  attributes :id, :departure_date, :package_id, :voucher_id, :price,
-             :number, :customer_id, :identity_ids, :person, :product, :midtrans_id
+  attributes :id, :departure_date, :package_id, :voucher_id, :price, :status,
+             :number, :customer_id, :identity_ids, :person, :midtrans_id, :product
 
   belongs_to :package
   belongs_to :voucher
