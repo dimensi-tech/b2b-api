@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 class Booking < ApplicationRecord
+  extend Enumerize
   belongs_to :customer, optional: :true
   belongs_to :package, optional: :true
   belongs_to :voucher, optional: :true
 
   has_many :payment_activities
-  
+  enumerize :status, in: { ordered: 0, paid: 1, error: 2 }
+
   after_create :assign_number
 
   def assign_number
