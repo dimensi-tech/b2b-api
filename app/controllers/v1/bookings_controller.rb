@@ -46,7 +46,9 @@ module V1
     end
 
     def update_midtrans
-      if @booking.present? && @booking.update(midtrans_id: params[:midtrans_id], status: 1)
+      if @booking.present? && @booking.update(midtrans_id: params[:midtrans_id],
+                                              status: params[:status])
+
         render json: @booking, serializer: BookingSerializer
       else
         render json: { success: false, message: 'Midtrans failed to update' }
