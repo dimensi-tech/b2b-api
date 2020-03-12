@@ -2,7 +2,12 @@
 
 Rails.application.routes.draw do
   namespace :v1 do
-    resources :customers
+    # devise_for :customers
+    resources :customers do
+      collection do
+        get :confirm_email
+      end
+    end
     resources :tokens, only: :create
 
     resources :ads do

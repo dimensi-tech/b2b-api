@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_10_135355) do
+ActiveRecord::Schema.define(version: 2020_03_12_152027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2019_12_10_135355) do
     t.integer "voucher_id"
     t.integer "person"
     t.string "payment_code"
+    t.integer "midtrans_id"
+    t.integer "status"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -61,6 +63,38 @@ ActiveRecord::Schema.define(version: 2019_12_10_135355) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_confirmed"
+    t.datetime "confirmed_at"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "discounts", force: :cascade do |t|
@@ -77,6 +111,16 @@ ActiveRecord::Schema.define(version: 2019_12_10_135355) do
     t.string "name"
     t.string "code"
     t.integer "province_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "email_templates", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.string "template_type"
+    t.string "attachment_file"
+    t.boolean "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -280,6 +324,14 @@ ActiveRecord::Schema.define(version: 2019_12_10_135355) do
     t.decimal "max_amount"
     t.integer "max_usage"
     t.boolean "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "wifi_roamings", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
