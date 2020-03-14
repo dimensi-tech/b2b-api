@@ -56,6 +56,7 @@ gem 'delayed_job_active_record', '4.1.4' # Background tasks
 gem 'dotenv-rails', '2.7.4' # Dotenv hiding secrets key
 gem 'devise', '4.7.1' # User authentication
 gem 'enumerize', '2.3.1' # Enumerated attributes
+gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'mini_magick', '4.9.5' # Image file uploader
 gem 'ransack', '2.3.2' # Filter records
 gem 'simple_command', '0.1.0' # Service objects
