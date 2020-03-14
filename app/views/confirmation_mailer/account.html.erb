@@ -1,0 +1,5 @@
+<%- body = @template.body %>
+<%- body ['RECIPIENT_FULL_NAME']       = @recipient.email %>
+<%- body ['LINK_ACCOUNT_CONFIRMATION'] = "#{ENV['HOST_URL_API']}/v1/customers/confirm_email?id=#{@recipient.id}" %>
+
+<%= body.html_safe %>

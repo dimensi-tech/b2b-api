@@ -45,5 +45,7 @@ module B2bApi
         )
       end
     end
+    config.time_zone = 'Asia/Jakarta'
+    config.active_job.queue_adapter = :delayed_job
   end
 end

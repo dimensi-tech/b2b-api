@@ -49,10 +49,14 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Add by us
-gem 'active_model_serializers'
-gem 'carrierwave', '~> 2.0'
-gem 'dotenv-rails', '2.7.4' # dotenv hiding secrets key
+gem 'active_model_serializers', '0.10.10' # Format json helper
+gem 'carrierwave', '~> 2.0' # Image uploader
+gem 'daemons', '1.3.1' # background tasks
+gem 'delayed_job_active_record', '4.1.4' # Background tasks
+gem 'dotenv-rails', '2.7.4' # Dotenv hiding secrets key
+gem 'devise', '4.7.1' # User authentication
 gem 'enumerize', '2.3.1' # Enumerated attributes
-gem 'ransack'
-gem 'simple_command'
-gem 'veritrans', '2.3.0'
+gem 'mini_magick', '4.9.5' # Image file uploader
+gem 'ransack', '2.3.2' # Filter records
+gem 'simple_command', '0.1.0' # Service objects
+gem 'veritrans', '2.3.0' # Payment gateway
