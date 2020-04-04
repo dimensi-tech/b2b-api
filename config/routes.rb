@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       collection do
         post :create_booking
         post :assign_identities
+        post :assign_passports
         post :update_midtrans
         get :list_bookings
         get :list_paid_bookings
