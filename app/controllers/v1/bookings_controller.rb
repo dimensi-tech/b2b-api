@@ -2,7 +2,7 @@
 
 module V1
   class BookingsController < ApplicationController
-    before_action :set_booking, only: %i[assign_identities assign_passports booking_detail update_midtrans]
+    before_action :set_booking, only: %i[assign_identities assign_passports booking_detail update_midtrans modify_booking]
 
     def create_booking
       @booking = Booking.new(booking_params)
@@ -17,8 +17,7 @@ module V1
       end
     end
 
-
-    def modify_pooking
+    def modify_booking
       if @booking.present? && @booking.update(booking_params)
         @booking.update(booking_status: 2)
         render json: @booking, serializer: BookingSerializer
