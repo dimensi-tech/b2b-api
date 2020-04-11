@@ -17,6 +17,16 @@ module V1
       end
     end
 
+
+    def modify_pooking
+      if @booking.present? && @booking.update(booking_params)
+        @booking.update(booking_status: 2)
+        render json: @booking, serializer: BookingSerializer
+      else
+        render json: { success: false, message: 'Error Modify Booking' }
+      end
+    end
+
     def assign_identities
       if @booking.present? && @booking.update(identities_params)
         render json: @booking, serializer: BookingSerializer

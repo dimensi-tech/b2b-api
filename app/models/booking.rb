@@ -8,6 +8,7 @@ class Booking < ApplicationRecord
 
   has_many :payment_activities
   enumerize :status, in: { ordered: 0, paid: 1, error: 2 }
+  enumerize :booking_status, in: { booked: 1, modified: 2, cancelled: 3 }
 
   after_create :assign_number
 
