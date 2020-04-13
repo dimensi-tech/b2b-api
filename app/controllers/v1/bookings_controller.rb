@@ -2,7 +2,9 @@
 
 module V1
   class BookingsController < ApplicationController
-    before_action :set_booking, only: %i[assign_identities assign_passports booking_detail update_midtrans modify_booking]
+    before_action :set_booking, only: %i[assign_identities assign_passports
+                                         booking_detail update_midtrans
+                                         modify_booking cancel_booking]
 
     def create_booking
       @booking = Booking.new(booking_params)
@@ -23,6 +25,15 @@ module V1
         render json: @booking, serializer: BookingSerializer
       else
         render json: { success: false, message: 'Error Modify Booking' }
+      end
+    end
+
+    def cancel_booking
+      if @booking.present?
+        @booking.update(booking_status: 3)
+        render json: @booking, serializer: BookingSerializer
+      else
+        render json: { success: false, message: 'Error to Canceling Booking'}
       end
     end
 
