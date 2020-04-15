@@ -53,6 +53,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :payment_savings do
+      collection do
+        post :create_payment_saving
+      end
+    end
+
     resources :travel_destinations do
       collection do
         get :featured_destinations

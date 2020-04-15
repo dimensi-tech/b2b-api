@@ -7,6 +7,8 @@ class Booking < ApplicationRecord
   belongs_to :voucher, optional: :true
 
   has_many :payment_activities
+  has_many :payment_savings
+
   enumerize :status, in: { ordered: 0, paid: 1, error: 2 }
   enumerize :booking_status, in: { booked: 1, modified: 2, cancelled: 3 }
 
