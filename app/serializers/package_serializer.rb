@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 class PackageSerializer < ActiveModel::Serializer
   attributes :id, :discount_percentage, :product_id, :discount_id, :discount_price,
              :min_person, :max_person, :down_payment, :duration_trip, :available_date,
-             :normal_price, :name, :description
+             :normal_price, :name, :description, :booking_options
 
   belongs_to :product
   belongs_to :discount
 
   has_many :package_details
   has_many :saving_packages
-  
+
   def discount_percentage
     object.discount.percentage if object.discount.present?
   end
@@ -22,5 +24,13 @@ class PackageSerializer < ActiveModel::Serializer
 
   def normal_price
     Package.find(object.id).price
+  end
+
+  def booking_options
+    if object.saving_packages.present?
+      [1, 2]
+    else
+      [1]
+    end
   end
 end
