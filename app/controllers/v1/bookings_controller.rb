@@ -33,15 +33,30 @@ module V1
         @booking.update(booking_status: 3)
         render json: @booking, serializer: BookingSerializer
       else
-        render json: { success: false, message: 'Error to Canceling Booking'}
+        render json: { success: false, message: 'Error to Canceling Booking' }
       end
     end
 
     def assign_identities
       if @booking.present? && @booking.update(identities_params)
+        identities_params[:identity_ids].each_with_index do |index, _identity|
+          @booking.create_savings(index) if @booking.saving_package.present?
+        end
         render json: @booking, serializer: BookingSerializer
       else
         render json: { success: false, message: 'Error Assign Identity Ids' }
+      end
+    end
+
+    def savings_customer
+      @savings = PaymentSaving.where(
+        booking_id: params[:booking_id],
+        identity_id: params[:identity_id]
+      )
+      if @savings.present?
+        render json: @savings
+      else
+        render json: { success: false, message: 'Cannot Find Savings' }
       end
     end
 
@@ -89,6 +104,17 @@ module V1
         render json: @bookings
       else
         render json: { success: false, message: 'Paid booking not available' }
+      end
+    end
+
+    def saving_paid
+      @saving = PaymentSaving.find_by(id: params[:id])
+
+      if @saving.present?
+        @saving.update(status: 2)
+        render json: @saving, serializer: PaymentSavingSerializer
+      else
+        render json: { success: false, message: 'Paid Saving  Failed' }
       end
     end
 
