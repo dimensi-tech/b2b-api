@@ -54,7 +54,7 @@ module V1
         identity_id: params[:identity_id]
       )
       if @savings.present?
-        render json: @savings
+        render json: @savings.order(payment_for: :asc)
       else
         render json: { success: false, message: 'Cannot Find Savings' }
       end
