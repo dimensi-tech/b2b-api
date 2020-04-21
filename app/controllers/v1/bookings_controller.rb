@@ -127,7 +127,7 @@ module V1
     def booking_params
       params.require(:booking)
             .permit(:departure_date, :package_id, :voucher_id, :person, :price,
-                    :midtrans_id, :customer_id, identity_ids: [], passport_ids: [])
+                    :midtrans_id, :booking_type, :saving_package_id, :customer_id, identity_ids: [], passport_ids: [])
     end
 
     def identities_params
