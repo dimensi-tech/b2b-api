@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         post :assign_identities
         post :assign_passports
         post :update_midtrans
+        post :saving_midtrans
         post :saving_paid
         get :list_bookings
         get :list_paid_bookings

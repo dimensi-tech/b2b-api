@@ -118,6 +118,16 @@ module V1
       end
     end
 
+    def saving_midtrans
+      @saving = PaymentSaving.find_by(id: params[:id])
+
+      if @saving.present? && @saving.update(midtrans_id: params[:midtrans_id])
+        render json: @saving, serializer: PaymentSavingSerializer
+      else
+        render json: { success: false, message: 'Paid Saving  Failed' }
+      end
+    end
+
     private
 
     def set_booking
