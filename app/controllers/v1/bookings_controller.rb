@@ -3,7 +3,7 @@
 module V1
   class BookingsController < ApplicationController
     before_action :set_booking, only: %i[assign_identities assign_passports
-                                         booking_detail update_midtrans
+                                         booking_detail update_midtrans assign_child_passports
                                          modify_booking cancel_booking]
 
     def create_booking
@@ -62,6 +62,14 @@ module V1
 
     def assign_passports
       if @booking.present? && @booking.update(passports_params)
+        render json: @booking, serializer: BookingSerializer
+      else
+        render json: { success: false, message: 'Error Assign Identity Ids' }
+      end
+    end
+
+    def assign_child_passports
+      if @booking.present? && @booking.update(child_passports_params)
         render json: @booking, serializer: BookingSerializer
       else
         render json: { success: false, message: 'Error Assign Identity Ids' }
@@ -147,6 +155,10 @@ module V1
 
     def passports_params
       params.require(:booking).permit(passport_ids: [])
+    end
+
+    def child_passports_params
+      params.require(:booking).permit(child_passport_ids: [])
     end
   end
 end

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
         post :cancel_booking
         post :assign_identities
         post :assign_passports
+        post :assign_child_passports
         post :update_midtrans
         post :saving_midtrans
         post :saving_paid
