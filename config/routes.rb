@@ -30,12 +30,21 @@ Rails.application.routes.draw do
         post :assign_identities
         post :assign_passports
         post :assign_child_passports
+        post :assign_adult_bio
+        post :assign_child_bio
         post :update_midtrans
         post :saving_midtrans
         post :saving_paid
         get :list_bookings
         get :list_paid_bookings
         get :savings_customer
+      end
+    end
+
+    resources :biodatas do
+      collection do
+        post :create_biodata
+        get :detail_biodata
       end
     end
 
