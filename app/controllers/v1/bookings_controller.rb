@@ -51,7 +51,8 @@ module V1
     def savings_customer
       @savings = PaymentSaving.where(
         booking_id: params[:booking_id],
-        identity_id: params[:identity_id]
+        identity_id: params[:identity_id],
+        passport_id: params[:passport_id]
       )
       if @savings.present?
         render json: @savings.order(payment_for: :asc)
@@ -70,8 +71,8 @@ module V1
 
     def assign_child_passports
       if @booking.present? && @booking.update(child_passports_params)
-        child_passports_params[:child_passport_ids].each_with_index do |index, _identity|
-          @booking.create_child_savings(index) if @booking.saving_package.present?
+        @booking.child_passport_ids.each do |passport_id|
+          @booking.create_child_savings(passport_id) if @booking.saving_package.present?
         end
         render json: @booking, serializer: BookingSerializer
       else

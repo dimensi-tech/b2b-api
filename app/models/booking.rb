@@ -36,8 +36,8 @@ class Booking < ApplicationRecord
     end
   end
 
-  def create_child_savings(passport_id)
-    return if PaymentSaving.where(passport_id: passport_id, booking_id: id).present?
+  def create_child_savings(callback_id)
+    return if PaymentSaving.where(passport_id: callback_id, booking_id: id).present?
 
     total_months = saving_package.sort
     index = 0
@@ -45,7 +45,7 @@ class Booking < ApplicationRecord
       index += 1
       PaymentSaving.create(
         booking_id: id, amount: saving_package.child_amount,
-        passport_id: passport_id, payment_for: index,
+        passport_id: callback_id, payment_for: index,
         status: 1, saving_type: 'child'
       )
     end
