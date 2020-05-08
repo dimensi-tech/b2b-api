@@ -29,9 +29,24 @@ class Booking < ApplicationRecord
     total_months.times do
       index += 1
       PaymentSaving.create(
-        booking_id: id, amount: saving_package.amount,
+        booking_id: id, amount: saving_package.adult_amount,
         identity_id: identity_id, payment_for: index,
-        status: 1
+        status: 1, saving_type: 'adult'
+      )
+    end
+  end
+
+  def create_child_savings(passport_id)
+    return if PaymentSaving.where(passport_id: passport_id, booking_id: id).present?
+
+    total_months = saving_package.sort
+    index = 0
+    total_months.times do
+      index += 1
+      PaymentSaving.create(
+        booking_id: id, amount: saving_package.child_amount,
+        passport_id: passport_id, payment_for: index,
+        status: 1, saving_type: 'child'
       )
     end
   end

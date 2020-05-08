@@ -70,6 +70,9 @@ module V1
 
     def assign_child_passports
       if @booking.present? && @booking.update(child_passports_params)
+        child_passports_params[:child_passport_ids].each_with_index do |index, _identity|
+          @booking.create_child_savings(index) if @booking.saving_package.present?
+        end
         render json: @booking, serializer: BookingSerializer
       else
         render json: { success: false, message: 'Error Assign Identity Ids' }
