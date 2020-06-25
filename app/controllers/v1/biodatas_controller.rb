@@ -30,7 +30,7 @@ module V1
 
     def biodata_params
       params.require(:biodata)
-            .permit(:name, :email, :phone, :heir_name, :heir_contact)
+            .permit(:name, :email, :phone, :heir_name, :heir_contact, :family_relation)
     end
   end
 end
