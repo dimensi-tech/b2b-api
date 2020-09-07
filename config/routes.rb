@@ -22,6 +22,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :autocomplete do
+      collection do
+        get :search_products
+      end
+    end
+
     resources :bookings do
       collection do
         post :create_booking
