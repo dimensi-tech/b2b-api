@@ -3,8 +3,9 @@ class V1::ProductsController < ApplicationController
   skip_before_action :authenticate_request
 
   def list_products
-    search = Product.order(created_at: :desc).ransack(params[:q])
+    search    = Product.available_packages.order(created_at: :desc).ransack(params[:q])
     @products = search.result(distinct: true)
+
     if @products.present?
       render json: @products
     else
