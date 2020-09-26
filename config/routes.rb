@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :customers do
       collection do
         get :confirm_email
+        post :create_profile
       end
     end
     resources :tokens, only: :create
