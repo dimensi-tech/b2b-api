@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 
     resources :products do
       collection do
-        get :list_products
+        post :list_products
       end
     end
 
