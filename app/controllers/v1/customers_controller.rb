@@ -10,6 +10,9 @@ class V1::CustomersController < ApplicationController
     if @customer.save
       ConfirmationJob.perform_later(@customer.id)
       @customer.update(confirmation_sent_at: Time.now)
+      CustomerProfile.create(
+        customer_id: @customer.id
+      )
       render json: @customer
     else
       render json: { success: false, message: @customer.errors.full_messages }
@@ -27,12 +30,11 @@ class V1::CustomersController < ApplicationController
     @customer = Customer.find_by(id: params[:customer_id])
 
     if @customer.present?
-      CustomerProfile.create(
+      CustomerProfile.update(
         first_name: params[:first_name],
         last_name: params[:last_name],
         company_name: params[:company_name],
         phone_number: params[:phone_number],
-        customer_id: @customer.id
       )
       render json: @customer, serializer: CustomerSerializer
     else
