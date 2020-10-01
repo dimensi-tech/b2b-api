@@ -1,0 +1,123 @@
+en:
+  bookings:
+    bookings:
+      number: Number
+      package_id: Package
+      customer_id: Customer Email
+      product_id: Product
+      action: Action
+    filter:
+      filter_header: Filter
+      number: Number
+      package_id: Package
+      customer_id: Customer Email
+    form:
+      number: Number
+      package_id: Package
+      customer_id: Customer Email
+    index:
+      page_header: Master Data Bookings
+      body_title: Manage Bookings
+      create: Ad Booking
+      report:
+        page_header: Report Format
+    new:
+      page_header: Master Data Bookings
+      body_title: Entry New Booking
+      card_header: Input Data Booking
+    edit:
+      page_header: Master Data Bookings
+      body_title: Edit Booking
+      card_header: Edit Data Booking
+    show:
+      page_header: Detail Booking
+      details: Details
+      name: Nama
+      code: Code
+      created_by: Created By
+      updated_by: Updated By
+      order_details:
+        title: Order Details
+        package_name: Package Name
+        package_price: Package Price
+        pax_package_prices: "Adult : %{adult}/pax, Child : %{child}/pax"
+        total_package_price: Total Package Price
+        number_people: Passengers
+        number_passengers: "Adult : %{adult}, Child : %{child}"
+        departure_date: Departure Date
+        change_date: (Change Date)
+        duration_trip: Duration Trip
+        days: days
+        travel_plans: Travel Plans
+        detail_plans: See Itinerary in Package Details
+        payment_status:  Payment Status
+        biodatas:
+          title: Biodata
+          name: Name
+          email: Email
+          phone: Phone Number
+          heir_name: Heir Name
+          heir_contact: Heir Contact
+          family_relation: Heir Ralationship
+        identities:
+          title: ID Card
+          nik: NIK
+          name: Name
+          date_birth: Date of Birth
+          gender: Gender
+          address: Address
+          rt_rw: RT/RW
+          vilage_name: Village
+          district_name: District
+          city_name: City
+          province_name: Province
+          religion: Religion
+          martial_status: Martial Status
+          occupation: Job
+        passports:
+          title: Passport
+          number: No Passport
+          full_name: Fullname
+          birth_place: Birth Place
+          birth_date: Birth Date
+          gender: Gender
+          mother_name: Mother Name
+          father_name: Father Name
+          expired_date: Expired Date
+        savings:
+          title: Savings
+          payment_for: Payment For
+          amount: Amount
+          status: Status
+      passengers: Passenger %{counter}
+      adult_passengers: Departure Passengers (Adult)
+      child_passengers: Departure Passengers (Child)
+      selected_product: Selected Product
+    create:
+      notice: Booking was successfully created.
+    update:
+      notice: Booking was successfully updated.
+    destroy:
+      notice: Booking was successfully deleteds.
+    report:
+      page_header: Report Booking
+      number: Number
+      package_id: Package
+      customer_id: Customer Email
+      product_id: Product
+      export_date: Export Date
+      booking_date: Booking Date
+      departure_date: Departure Date
+      email: Email
+    detail_savings:
+      order_details:
+        savings:
+          title: Savings
+          payment_for: Payment For
+          amount: Amount
+          status: Status
+  simple_form:
+    labels:
+      country:
+        name: Nama
+        code: Code

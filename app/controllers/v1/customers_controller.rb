@@ -8,7 +8,7 @@ class V1::CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      ConfirmationJob.perform_later(@customer.id)
+      ConfirmationJob.perform_later('account', @customer.id, nil)
       @customer.update(confirmation_sent_at: Time.now)
       CustomerProfile.create(
         customer_id: @customer.id
