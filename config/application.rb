@@ -45,6 +45,11 @@ module B2bApi
         )
       end
     end
+    config.i18n.load_path += Dir[
+      Rails.root.join('config', 'locales', '**', '*.{rb,yml}')
+    ]
+    config.i18n.default_locale = :id
+    config.i18n.available_locales = [:id, :en]
     config.time_zone = 'Asia/Jakarta'
     config.active_job.queue_adapter = :delayed_job
   end

@@ -1,11 +1,23 @@
 class ConfirmationMailer < ApplicationMailer
-  def account(customer_id)
+  add_template_helper ApplicationHelper
+
+  def account(customer_id, _resource_id)
     @recipient = Customer.find(customer_id)
     @template  = EmailTemplate.active.type(:email_confirmation).last
 
     check_attachment(@template)
 
     mail to: @recipient.email, subject: 'Konfirmasi Akun'
+  end
+
+  def booking(customer_id, resource_id)
+    @recipient = Customer.find(customer_id)
+    @booking   = Booking.find(resource_id)
+    @template  = EmailTemplate.active.type(:booking_confirmation).last
+
+    check_attachment(@template)
+
+    mail to: @recipient.email, subject: 'Konfirmasi Booking'
   end
 
   private

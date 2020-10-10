@@ -1,0 +1,123 @@
+id:
+  bookings:
+    bookings:
+      number: Nomor
+      package_id: Paket
+      customer_id: Email Pelanggan
+      product_id: Produk
+      action: Aksi
+    filter:
+      filter_header: Filter
+      number: Nomor
+      package_id: Paket
+      customer_id: Email Pelanggan
+    form:
+      number: Nomor
+      package_id: Paket
+      customer_id: Email Pelanggan
+    index:
+      page_header: Master Data Boking
+      body_title: Kelola Boking
+      create: Tambah Boking
+      report:
+        page_header: Format Laporan
+    new:
+      page_header: Master Data Boking
+      body_title: Entry Boking Baru
+      card_header: Input Data Boking
+    edit:
+      page_header: Master Data Boking
+      body_title: Ubah Boking
+      card_header: Ubah Data Boking
+    show:
+      page_header: Detail Boking
+      details: Detail
+      name: Nama
+      code: Kode
+      created_by: Dibuat Oleh
+      updated_by: Diubah Oleh
+      order_details:
+        title: Rincian Pemesanan
+        package_name: Nama Paket
+        package_price: Harga Paket
+        pax_package_prices: "Dewasa : %{adult}/pax, Anak : %{child}/pax"
+        total_package_price: Total Harga Paket
+        number_people: Jumlah Orang
+        number_passengers: "Dewasa : %{adult}, Anak : %{child}"
+        departure_date: Tanggal Keberangkatan
+        change_date: (Ubah Tanggal)
+        duration_trip: Lama Hari
+        days: hari
+        travel_plans: Rencana Perjalanan
+        detail_plans: Lihat Rencana Perjalanan di Detail Paket
+        payment_status: Status Pembayaran
+        biodatas:
+          title: Biodata
+          name: Nama
+          email: Email
+          phone: Nomor HP
+          heir_name: Nama Ahli Waris
+          heir_contact: Kontak Ahli Waris
+          family_relation: Hubungan Ahli Waris
+        identities:
+          title: KTP
+          nik: NIK
+          name: Nama
+          date_birth: Tempat/Tgl Lahir
+          gender: Jenis Kelamin
+          address: Alamat
+          rt_rw: RT/RW
+          vilage_name: Kel/Desa
+          district_name: Kecamatan
+          city_name: Kota
+          province_name: Propinsi
+          religion: Agama
+          martial_status: Status Perkawinan
+          occupation: Pekerjaan
+        passports:
+          title: Paspor
+          number: No Paspor
+          full_name: Nama Lengkap
+          birth_place: Tempat Lahir
+          birth_date: Tanggal Lahir
+          gender: Jenis Kelamin
+          mother_name: Nama Ibu
+          father_name: Nama Ayah
+          expired_date: Tanggal Habis Berlaku
+        savings:
+          title: Tabungan
+          payment_for: Pembayaran Ke
+          amount: Jumlah
+          status: Status
+      passengers: Penumpang %{counter}
+      adult_passengers: Penumpang Keberangkatan (Dewasa)
+      child_passengers: Penumpang Keberangkatan (Anak)
+      selected_product: Product Dipilih
+    create:
+      notice: Boking baru berhasil dibuat.
+    update:
+      notice: Boking berhasil diubah.
+    destroy:
+      notice: Boking berhasil dihapus.
+    report:
+      page_header: Laporan Booking
+      number: Nomor
+      package_id: Paket
+      customer_id: Email Pelanggan
+      product_id: Produk
+      export_date: Tanggal Export
+      booking_date: Tanggal Boking
+      departure_date: Tanggal Keberangkatan
+      email: Email
+    detail_savings:
+      order_details:
+        savings:
+          title: Tabungan
+          payment_for: Pembayaran Ke
+          amount: Jumlah
+          status: Status
+  simple_form:
+    labels:
+      country:
+        name: Nama
+        code: Kode

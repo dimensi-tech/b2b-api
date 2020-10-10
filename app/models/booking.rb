@@ -2,10 +2,10 @@
 
 class Booking < ApplicationRecord
   extend Enumerize
-  belongs_to :customer, optional: :true
-  belongs_to :package, optional: :true
-  belongs_to :voucher, optional: :true
-  belongs_to :saving_package, optional: :true
+  belongs_to :customer, optional: true
+  belongs_to :package, optional: true
+  belongs_to :voucher, optional: true
+  belongs_to :saving_package, optional: true
 
   has_many :payment_activities
   has_many :payment_savings
@@ -62,5 +62,11 @@ class Booking < ApplicationRecord
     end
 
     update(payment_code: code)
+  end
+
+  def calculate_total_booking
+    total_adult_price = adult * package.adult_price
+    total_child_price = child * package.child_price
+    total_adult_price + total_child_price
   end
 end
