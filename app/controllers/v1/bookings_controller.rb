@@ -8,7 +8,7 @@ module V1
 
     def create_booking
       @booking = Booking.new(booking_params)
-      @booking.customer_id = @current_customer.id
+      # @booking.customer_id = @current_customer.id
 
       if @booking.save
         @booking.generate_payment_code
@@ -16,6 +16,21 @@ module V1
       else
         puts @booking.errors
         render json: { success: false, message: 'Error Create booking' }
+      end
+    end
+
+    def down_payment
+      @booking = Booking.find(params[:booking_id])
+
+      if @booking.present?
+        @booking.update(
+          booking_status: params[:booking_status], dp_amount: params[:dp_amount],
+          child_amount_saving: params[:child_amount_saving],
+          adult_amount_saving: params[:adult_amount_saving]
+        )
+        render json: @booking, serializer: BookingSerializer
+      else
+        render json: { success: false, message: 'Error Down Payment Booking' }
       end
     end
 
@@ -72,7 +87,9 @@ module V1
     def assign_child_passports
       if @booking.present? && @booking.update(child_passports_params)
         @booking.child_passport_ids.each do |passport_id|
-          @booking.create_child_savings(passport_id) if @booking.saving_package.present?
+          if @booking.saving_package.present?
+            @booking.create_child_savings(passport_id)
+          end
         end
         render json: @booking, serializer: BookingSerializer
       else
@@ -164,7 +181,7 @@ module V1
 
     def booking_params
       params.require(:booking)
-            .permit(:departure_date, :package_id, :voucher_id, :person, :price,
+            .permit(:departure_date, :package_id, :voucher_id, :person, :price, :booking_status,
                     :midtrans_id, :booking_type, :saving_package_id, :customer_id, :adult, :child,
                     identity_ids: [], passport_ids: [])
     end

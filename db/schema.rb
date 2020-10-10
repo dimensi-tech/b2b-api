@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_12_152027) do
+ActiveRecord::Schema.define(version: 2020_09_26_005922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 2020_03_12_152027) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "url"
+  end
+
+  create_table "biodata", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "heir_name"
+    t.string "heir_contact"
+    t.string "family_relation"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -41,6 +52,13 @@ ActiveRecord::Schema.define(version: 2020_03_12_152027) do
     t.string "payment_code"
     t.string "midtrans_id"
     t.string "status"
+    t.integer "passport_ids", default: [], array: true
+    t.integer "booking_status"
+    t.integer "booking_type"
+    t.integer "saving_package_id"
+    t.integer "child_passport_ids", default: [], array: true
+    t.integer "adult_bio_ids", default: [], array: true
+    t.integer "child_bio_ids", default: [], array: true
   end
 
   create_table "categories", force: :cascade do |t|
@@ -54,6 +72,17 @@ ActiveRecord::Schema.define(version: 2020_03_12_152027) do
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.string "code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customer_profiles", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "company_name"
+    t.string "phone_number"
+    t.text "company_address"
+    t.integer "customer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -75,6 +104,8 @@ ActiveRecord::Schema.define(version: 2020_03_12_152027) do
     t.string "confirmation_token"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.boolean "is_confirmed"
+    t.datetime "confirmed_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
@@ -184,12 +215,16 @@ ActiveRecord::Schema.define(version: 2020_03_12_152027) do
     t.decimal "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "min_person"
-    t.integer "max_person"
+    t.integer "min_adult"
+    t.integer "max_adult"
     t.string "duration_trip"
     t.integer "discount_id"
     t.decimal "down_payment"
     t.string "available_date", default: [], array: true
+    t.integer "min_child"
+    t.integer "max_child"
+    t.decimal "adult_price"
+    t.decimal "child_price"
   end
 
   create_table "passports", force: :cascade do |t|
@@ -212,6 +247,27 @@ ActiveRecord::Schema.define(version: 2020_03_12_152027) do
     t.string "payment_type"
     t.string "transaction_status"
     t.string "status_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "payment_savings", force: :cascade do |t|
+    t.integer "booking_id"
+    t.integer "payment_for"
+    t.decimal "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "identity_id"
+    t.integer "status"
+    t.integer "midtrans_id"
+    t.integer "passport_id"
+    t.string "saving_type"
+  end
+
+  create_table "policies", force: :cascade do |t|
+    t.integer "package_id"
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -254,6 +310,15 @@ ActiveRecord::Schema.define(version: 2020_03_12_152027) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
+  create_table "saving_packages", force: :cascade do |t|
+    t.integer "package_id"
+    t.integer "sort"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "adult_amount"
+    t.decimal "child_amount"
+  end
+
   create_table "sub_districts", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -275,6 +340,15 @@ ActiveRecord::Schema.define(version: 2020_03_12_152027) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+  end
+
+  create_table "travel_partners", force: :cascade do |t|
+    t.string "name"
+    t.string "logo"
+    t.text "address"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "urban_villages", force: :cascade do |t|
