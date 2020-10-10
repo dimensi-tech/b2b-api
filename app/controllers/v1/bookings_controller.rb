@@ -26,9 +26,8 @@ module V1
 
       if @booking.present?
         @booking.update(
-          booking_status: params[:booking_status], dp_amount: params[:dp_amount],
-          child_amount_saving: params[:child_amount_saving],
-          adult_amount_saving: params[:adult_amount_saving]
+          booking_status: params[:booking_status],
+          dp_amount: params[:dp_amount]
         )
         render json: @booking, serializer: BookingSerializer
       else
@@ -185,7 +184,7 @@ module V1
       params.require(:booking)
             .permit(:departure_date, :package_id, :voucher_id, :person, :price, :booking_status,
                     :midtrans_id, :booking_type, :saving_package_id, :customer_id, :adult, :child,
-                    identity_ids: [], passport_ids: [])
+                    :child_amount_saving, :adult_amount_saving, identity_ids: [], passport_ids: [])
     end
 
     def identities_params
