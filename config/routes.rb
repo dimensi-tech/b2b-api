@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         post :update_midtrans
         post :saving_midtrans
         post :saving_paid
+        post :down_payment
         get :list_bookings
         get :list_paid_bookings
         get :savings_customer
