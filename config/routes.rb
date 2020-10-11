@@ -87,6 +87,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :travel_partners do
+      collection do
+        get :featured_travel_partners
+      end
+    end
+
     resources :vouchers do
       collection do
         post :create_voucher_usage
