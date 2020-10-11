@@ -12,7 +12,7 @@ class Booking < ApplicationRecord
 
   enumerize :booking_type, in: { full: 1, savings: 2 }
   enumerize :status, in: { ordered: 0, paid: 1, error: 2 }
-  enumerize :booking_status, in: { booked: 1, modified: 2, cancelled: 3, 
+  enumerize :booking_status, in: { booked: 1, modified: 2, cancelled: 3,
                                    down_payment: 4, pending: 0 }
 
   after_create :assign_number
@@ -23,14 +23,16 @@ class Booking < ApplicationRecord
   end
 
   def create_savings(identity_id)
-    return if PaymentSaving.where(identity_id: identity_id, booking_id: id).present?
+    if PaymentSaving.where(identity_id: identity_id, booking_id: id).present?
+      return
+    end
 
     total_months = saving_package.sort
     index = 0
     total_months.times do
       index += 1
       PaymentSaving.create(
-        booking_id: id, amount: saving_package.adult_amount,
+        booking_id: id, amount: adult_amount_saving,
         identity_id: identity_id, payment_for: index,
         status: 1, saving_type: 'adult'
       )
@@ -38,14 +40,16 @@ class Booking < ApplicationRecord
   end
 
   def create_child_savings(callback_id)
-    return if PaymentSaving.where(passport_id: callback_id, booking_id: id).present?
+    if PaymentSaving.where(passport_id: callback_id, booking_id: id).present?
+      return
+    end
 
     total_months = saving_package.sort
     index = 0
     total_months.times do
       index += 1
       PaymentSaving.create(
-        booking_id: id, amount: saving_package.child_amount,
+        booking_id: id, amount: child_amount_saving,
         passport_id: callback_id, payment_for: index,
         status: 1, saving_type: 'child'
       )
