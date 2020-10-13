@@ -1,5 +1,5 @@
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :package, :image_path
+  attributes :id, :name, :description, :package, :image_path, :travel_destination
 
   belongs_to :category
   belongs_to :travel_destination

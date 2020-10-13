@@ -26,6 +26,7 @@ gem 'jwt'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem 'kaminari'
 gem 'rack-cors'
 
 group :development, :test do
@@ -53,8 +54,8 @@ gem 'active_model_serializers', '0.10.10' # Format json helper
 gem 'carrierwave', '~> 2.0' # Image uploader
 gem 'daemons', '1.3.1' # background tasks
 gem 'delayed_job_active_record', '4.1.4' # Background tasks
-gem 'dotenv-rails', '2.7.4' # Dotenv hiding secrets key
 gem 'devise', '4.7.1' # User authentication
+gem 'dotenv-rails', '2.7.4' # Dotenv hiding secrets key
 gem 'enumerize', '2.3.1' # Enumerated attributes
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'mini_magick', '4.9.5' # Image file uploader
