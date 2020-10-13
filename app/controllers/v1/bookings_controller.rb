@@ -35,6 +35,16 @@ module V1
       end
     end
 
+    def update_booking_status
+      @booking = Booking.find(params[:booking_id])
+
+      if @booking.present? && @booking.update(booking_status: params[:booking_status])
+        render json: @booking, serializer: BookingSerializer
+      else
+        render json: { success: false, message: 'Error Update Booking Status' }
+      end
+    end
+
     def modify_booking
       if @booking.present? && @booking.update(booking_params)
         @booking.update(booking_status: 2)
@@ -116,9 +126,16 @@ module V1
 
     def list_bookings
       @bookings = Booking.where(customer_id: @current_customer.id)
+                         .page(params[:page])
 
       if @bookings.present?
-        render json: @bookings
+        booking = @bookings.map { |n| BookingSerializer.new(n, root: false) }
+        render json: { booking: booking,
+                       meta: { current_page: @bookings.current_page,
+                               next_page: @bookings.next_page,
+                               prev_page: @bookings.prev_page,
+                               total_pages: @bookings.total_pages,
+                               total_count: @bookings.total_count } }
       else
         render json: { success: false, message: 'Error Assign Identity Ids' }
       end
