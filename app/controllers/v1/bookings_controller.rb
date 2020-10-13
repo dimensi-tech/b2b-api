@@ -112,7 +112,7 @@ module V1
 
     def list_bookings
       @bookings = Booking.where(customer_id: @current_customer.id)
-                         .page(params[:page])
+                         .order('created_at desc').page(params[:page])
 
       if @bookings.present?
         booking = @bookings.map { |n| BookingSerializer.new(n, root: false) }
