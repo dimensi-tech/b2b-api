@@ -21,20 +21,6 @@ module V1
       end
     end
 
-    def down_payment
-      @booking = Booking.find(params[:booking_id])
-
-      if @booking.present?
-        @booking.update(
-          booking_status: params[:booking_status],
-          dp_amount: params[:dp_amount]
-        )
-        render json: @booking, serializer: BookingSerializer
-      else
-        render json: { success: false, message: 'Error Down Payment Booking' }
-      end
-    end
-
     def update_booking_status
       @booking = Booking.find(params[:booking_id])
 
@@ -199,7 +185,7 @@ module V1
 
     def booking_params
       params.require(:booking)
-            .permit(:departure_date, :package_id, :voucher_id, :person, :price, :booking_status,
+            .permit(:departure_date, :package_id, :voucher_id, :person, :price, :booking_status, :dp_amount,
                     :midtrans_id, :booking_type, :saving_package_id, :customer_id, :adult, :child,
                     :child_amount_saving, :adult_amount_saving, identity_ids: [], passport_ids: [])
     end
