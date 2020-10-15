@@ -23,7 +23,7 @@ class AuthenticateCustomer
 
   def customer
     customer = Customer.find_by_email(email)
-    return customer if customer && customer.authenticate(password)
+    return customer if customer && customer.authenticate(password) && customer.confirmed_at?
 
     errors.add :customer_authentication, 'invalid credentials'
     nil

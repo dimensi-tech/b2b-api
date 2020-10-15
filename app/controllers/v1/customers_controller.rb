@@ -24,6 +24,8 @@ class V1::CustomersController < ApplicationController
       @customer.confirmed_at = Time.now
       @customer.save(validate: false)
     end
+
+    redirect_to 'http://majreha.com/'
   end
 
   def create_profile
