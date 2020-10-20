@@ -1,0 +1,8 @@
+<%- body = @template.body %>
+<%- body ['BOOKING_NUMBER']      = @booking.number %>
+<%- body ['RECIPIENT_FULL_NAME'] = @recipient.email %>
+<%- body ['PACKAGE_NAME']        = @booking.package.name %>
+<%- body ['CANCELLED_DATE']      = Time.now.strftime('%d-%B-%Y, %H:%M:%S') %>
+<%- body ['LINK_HOME']           = ENV['HOST_URL_FRONTEND'] %>
+
+<%= body.html_safe %>

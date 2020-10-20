@@ -1,0 +1,8 @@
+<%- body = @template.body %>
+<%- body ['BOOKING_NUMBER']        = @booking.number %>
+<%- body ['RECIPIENT_FULL_NAME']   = @recipient.email %>
+<%- body ['PACKAGE_NAME']          = @booking.package.name %>
+<%- body ['DEPARTURE_DATE']        = @booking.departure_date.strftime('%d-%B-%Y') %>
+<%- body ['LINK_HISTORY_BOOKINGS'] = "#{ENV['HOST_URL_FRONTEND']}/booking-history" %>
+
+<%= body.html_safe %>

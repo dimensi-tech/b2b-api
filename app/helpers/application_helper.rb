@@ -15,6 +15,8 @@ module ApplicationHelper
   end
 
   def default_currency(value)
+    return 'Rp. 0' if value.nil?
+
     ActionController::Base.helpers.number_to_currency(value, unit: 'Rp ', delimiter: '.', precision: 0)
   end
 

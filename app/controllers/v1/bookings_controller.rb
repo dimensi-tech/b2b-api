@@ -4,7 +4,8 @@ module V1
   class BookingsController < ApplicationController
     before_action :set_booking, only: %i[assign_identities assign_passports assign_adult_bio
                                          booking_detail update_midtrans assign_child_passports
-                                         modify_booking cancel_booking assign_child_bio]
+                                         modify_booking cancel_booking assign_child_bio
+                                         update_booking_status]
 
     def create_booking
       @booking = Booking.new(booking_params)
@@ -22,9 +23,11 @@ module V1
     end
 
     def update_booking_status
-      @booking = Booking.find(params[:booking_id])
-
       if @booking.present? && @booking.update(booking_status: params[:booking_status])
+        Bookings::BookingStatusService.new(
+          status: params[:booking_status], customer: @current_customer, booking: @booking
+        ).call
+
         render json: @booking, serializer: BookingSerializer
       else
         render json: { success: false, message: 'Error Update Booking Status' }
