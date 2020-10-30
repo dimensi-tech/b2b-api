@@ -2,7 +2,7 @@
 
 module V1
   class BookingsController < ApplicationController
-    skip_before_action :authenticate_request, only: %i[booking_detail]
+    # skip_before_action :authenticate_request, only: %i[booking_detail]
     before_action :set_booking, only: %i[assign_identities assign_passports assign_adult_bio
                                          booking_detail update_midtrans assign_child_passports
                                          modify_booking cancel_booking assign_child_bio
