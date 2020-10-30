@@ -6,7 +6,7 @@ class V1::ProductsController < ApplicationController
 
   def list_products
     search = Product.order(created_at: :desc).ransack(params[:q])
-    @products = search.result(distinct: true).page(params[:page])
+    @products = search.result(distinct: true).includes(:packages).page(params[:page])
     if @products.present?
       product = @products.map {|n| ProductSerializer.new(n, root:false)}
       render json: { product: product,
