@@ -7,6 +7,8 @@ module V1
                                          modify_booking cancel_booking assign_child_bio
                                          update_booking_status]
 
+    skip_before_action :authenticate_request, only: [booking_detail]
+
     def create_booking
       @booking = Booking.new(booking_params)
       # @booking.customer_id = @current_customer.id
