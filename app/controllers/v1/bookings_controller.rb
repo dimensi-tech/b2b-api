@@ -132,8 +132,7 @@ module V1
     end
 
     def booking_detail
-      @booking = Booking.where(customer_id: @current_customer.id,
-                               id: params[:booking_id]).last
+      @booking = Booking.where(id: params[:booking_id]).last
       if @booking.present?
         render json: @booking, serializer: BookingSerializer
       else
