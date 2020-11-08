@@ -13,7 +13,8 @@ class Booking < ApplicationRecord
   enumerize :booking_type, in: { full: 1, savings: 2 }
   enumerize :status, in: { ordered: 0, paid: 1, error: 2 }
   enumerize :booking_status, in: { pending: 0, booked: 1, modified: 2, cancelled: 3,
-                                   down_payment: 4, saving_progress: 5, completed: 6, paid: 7 }
+                                   down_payment: 4, saving_progress: 5, completed: 6,
+                                   paid: 7, payment_50: 8, payment_final: 9 }
 
   after_create :assign_number
 
