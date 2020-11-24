@@ -15,6 +15,7 @@ module V1
       if @booking.save
         @booking.generate_payment_code
         ConfirmationJob.perform_later('booking', @current_customer.id, @booking.id)
+        # ConfirmationJob.perform_later('booking_partner', @booking.package.product.travel_partner.id, @booking.id)
 
         render json: @booking, serializer: BookingSerializer
       else

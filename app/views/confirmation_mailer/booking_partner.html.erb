@@ -1,0 +1,12 @@
+<%- body = @template.body %>
+<%- body ['BOOKING_NUMBER']      = @booking.number %>
+<%- body ['RECIPIENT_FULL_NAME'] = @recipient.email %>
+<%- body ['PACKAGE_NAME']        = @booking.package.name %>
+<%- body ['PACKAGE_PRICE']       = t('bookings.show.order_details.pax_package_prices', adult: default_currency(@booking.package.adult_price), child: default_currency(@booking.package.child_price)) %>
+<%- body ['NUMBER_PEOPLE']       = t('bookings.show.order_details.number_passengers', adult: @booking.adult, child: @booking.child) %>
+<%- body ['DEPARTURE_DATE']      = @booking.departure_date.strftime('%d-%B-%Y') %>
+<%- body ['DURATION_TRIP']       = "#{@booking.package.duration_trip} #{t('bookings.show.order_details.days')}" %>
+<%- body ['TOTAL_PACKAGE_PRICE'] = default_currency(@booking.calculate_total_booking) %>
+<%- body ['LINK_DETAIL_BOOKING'] = "#{ENV['HOST_URL_BACKEND']}/bookings/#{@booking.id}" %>
+
+<%= body.html_safe %>

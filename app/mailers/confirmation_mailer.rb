@@ -20,6 +20,16 @@ class ConfirmationMailer < ApplicationMailer
     mail to: @recipient.email, subject: 'Konfirmasi Booking'
   end
 
+  def booking_partner(partner_id, resource_id)
+    @recipient = Partner.find(partner_id)
+    @booking   = Booking.find(resource_id)
+    @template  = EmailTemplate.active.type(:booking_partner_confirmation).last
+
+    check_attachment(@template)
+
+    mail to: @recipient.email, subject: 'Booking Baru'
+  end
+
   private
 
   def check_attachment(template)
