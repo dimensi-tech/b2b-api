@@ -51,7 +51,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Add by us
 gem 'active_model_serializers', '0.10.10' # Format json helper
-gem 'carrierwave', '~> 2.0' # Image uploader
+gem 'carrierwave', '~> 2.1' # Image uploader
 gem 'daemons', '1.3.1' # background tasks
 gem 'delayed_job_active_record', '4.1.4' # Background tasks
 gem 'devise', '4.7.1' # User authentication
