@@ -82,7 +82,7 @@ module V1
       if @booking.present? && @booking.update(passports_params)
         render json: @booking, serializer: BookingSerializer
       else
-        render json: { success: false, message: 'Error Assign Identity Ids' }
+        render json: { success: false, message: 'Error Assign Identity Idss' }
       end
     end
 
